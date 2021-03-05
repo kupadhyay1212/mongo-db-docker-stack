@@ -1,0 +1,1 @@
+# mongo-db-docker-stack

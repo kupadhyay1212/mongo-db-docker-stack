@@ -1,0 +1,49 @@
+version: '3.7'
+
+services:
+  mongodb:
+    image: mongodb:latest
+    ports:
+      - 33067:27017
+    volumes:
+      - /app/ncell-hr-admin/data/mongodb/db:/data/db
+      - /app/ncell-hr-admin/data/mongodb/configdb:/data/configdb
+    environment:
+      - TZ=Asia/Kathmandu
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=Hradmingps#321@
+    networks:
+      - portal
+    deploy:
+      labels:
+        feature.description: 'MONGODB'
+      placement:
+        constraints: [node.role == worker]
+
+
+  mongoexpress:
+    image: mongo-express:latest
+    ports:
+      - 8081:8081
+    environment:
+      - TZ=Asia/Kathmandu
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=root
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=Hradmingps#321@
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=Nirvana3
+  # volumes:
+  #   - /app/ncell-hr-admin/data/mongodb/db
+    networks:
+      - portal
+    deploy:
+      labels:
+        feature.description: 'Mongoexpress'
+      placement:
+        constraints: [node.role == worker]
+
+
+networks:
+  portal:
+

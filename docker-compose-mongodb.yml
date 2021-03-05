@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
   mongodb:
-    image: mongodb:latest
+    image: mongo:latest
     ports:
       - 33067:27017
     volumes:
